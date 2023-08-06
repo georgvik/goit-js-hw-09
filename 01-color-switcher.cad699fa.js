@@ -1,2 +1,0 @@
-const t=document.querySelector("button[data-start]"),e=document.querySelector("button[data-stop]"),o=document.querySelector("body");let n=null,r=!1;function a(){r||(r=!0,n=setInterval((()=>{o.style.backgroundColor=`#${Math.floor(16777215*Math.random()).toString(16).padStart(6,0)}`}),1e3))}t.addEventListener("click",(()=>{a()})),e.addEventListener("click",(()=>{r=!1,clearInterval(n)}));
-//# sourceMappingURL=01-color-switcher.cad699fa.js.map
