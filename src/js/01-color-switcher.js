@@ -16,21 +16,14 @@ function getRandomHexColor() {
     }
     isActive = true;
     intervalId = setInterval(() => {
-        bodyEl.style.backgroundColor = `${getRandomHexColor()}`;
+        bodyEl.style.backgroundColor = getRandomHexColor();
             }, 1000);
-            
- };
+      };
  
  function stopBodyColorChange() {
     isActive = false;
     clearInterval(intervalId);
  }
-  startBtn.addEventListener("click", () => {
-    startBodyColorChange();  
-  
-    
- });
+  startBtn.addEventListener("click",  startBodyColorChange);
 
- stopBtn.addEventListener("click", () =>{
-    stopBodyColorChange();
- });
+ stopBtn.addEventListener("click",stopBodyColorChange);

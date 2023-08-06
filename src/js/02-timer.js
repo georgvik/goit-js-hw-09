@@ -3,51 +3,46 @@ import "flatpickr/dist/flatpickr.min.css";
 
 const startBtn = document.querySelector("button[data-start]");
 const timerPicker = document.querySelector('#datetime-picker');
-// const boxTimer = document.querySelector('.timer');
 const timerValue = {
   days: document.querySelector("[data-days]"),
   hours: document.querySelector("[data-hours]"),
   minutes: document.querySelector("[data-minutes]"),
   seconds: document.querySelector("[data-seconds]")
-}
+};
 
 let timerId = null;
 startBtn.disabled = true;
 
-
+startBtn.addEventListener("click", changeTimerValue);
 
 const options = {
-    enableTime: true,
-    time_24hr: true,
-    defaultDate: new Date(),
-    minuteIncrement: 1,
-    onClose(selectedDates) {
-      console.log(selectedDates[0]);
-      if (selectedDates[0] < new Date()) {
-        startBtn.disabled = true;
-        window.alert("Please choose a date in the future")
-      } else {
-        startBtn.disabled = false
-        startBtn.addEventListener("click", () => { changeTimerValue(selectedDates[0]) })
-      }
-    },
-  };
-  
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: Date.now(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+     if (selectedDates[0] < Date.now()) {
+      startBtn.disabled = true;
+      window.alert("Please choose a date in the future")
+    } else {
+      startBtn.disabled = false
+          }
+  },
+};
 
-  flatpickr(timerPicker, options);
+flatpickr(timerPicker, options);
 
   function changeTimerValue() {
     let timer = setInterval(() => {
-      let countdown = new Date(timerPicker.value) - new Date();
+      let countdown = new Date(timerPicker.value) - Date.now();
       startBtn.disabled = true;
       timerPicker.disabled = true;
-      console.log(countdown)
       if (countdown >= 0) {
-        let timerData = convertMs(countdown);
-          timerValue.days.textContent = timerData.days;
-          timerValue.hours.textContent = timerData.hours;
-          timerValue.minutes.textContent = timerData.minutes;
-          timerValue.seconds.textContent = timerData.seconds;
+       let timerData = convertMs(countdown);
+        timerValue.days.textContent = timerData.days;
+        timerValue.hours.textContent = timerData.hours;
+        timerValue.minutes.textContent = timerData.minutes;
+        timerValue.seconds.textContent = timerData.seconds;       
       } else {
         clearInterval(timer);
       }
